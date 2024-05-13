@@ -15,7 +15,7 @@ class BA:
         else:
             print("Insufficient funds.")
 
-    def display_balance(self):
+    def balance(self):
         print(f"Account Number: {self.account_number}")
         print(f"Current Balance: {self.balance}")
 
@@ -36,14 +36,14 @@ for acc_num, (pin, balance) in accounts.items():
     accounts[acc_num] = (pin, int(balance))
 
 account_number = input("Enter account number: ")
-pin = input("Enter PIN: ")
+pin = input("Enter your PIN: ")
 
 if account_number in accounts and pin == accounts[account_number][0]:
     print("Login successful.")
     user_account = BA(account_number, pin, accounts[account_number][1])
 
     while True:
-        print("\n1. Deposit\n2. Withdraw\n3. Display Balance\n4. Exit")
+        print("\n1. Deposit\n2. Withdraw\n3. Balance\n4. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -53,7 +53,7 @@ if account_number in accounts and pin == accounts[account_number][0]:
             amount = int(input("Enter the amount to withdraw: "))
             user_account.withdraw(amount)
         elif choice == "3":
-            user_account.display_balance()
+            user_account.balance()
         elif choice == "4":
             exit_option = input("Are you sure you want to exit? (yes/no): ")
             if exit_option.lower() == "yes":
@@ -62,8 +62,8 @@ if account_number in accounts and pin == accounts[account_number][0]:
         else:
             print("Invalid choice. Please try again.")
         
-        end = input("Do you want to exit or go back to the menu? (Yes/No): ")
-        if end.lower() == "yes":
+        end = input("Do you want to exit or go back to the menu? (exit/menu): ")
+        if end.lower() == "exit":
             exit_option = input("Are you sure you want to exit? (yes/no): ")
             if exit_option.lower() == "yes":
                 print("Thank you for banking with us.")
