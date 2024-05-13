@@ -1,0 +1,94 @@
+class BA:
+    def __init__(self, account_number, pin, balance=0):
+        self.account_number = account_number
+        self.pin = pin
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Successfully Deposited {amount}. Current balance: {self.balance}")
+
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            print(f"{amount} Withdrawn successfully. Current balance: {self.balance}")
+        else:
+            print("Insufficient funds.")
+
+    def display_balance(self):
+        print(f"Account Number: {self.account_number}")
+        print(f"Current Balance: {self.balance}")
+
+accounts = {
+    "123456": ("1234", "1000"),  
+    "654321": ("4321", "500"),
+    "987654": ("5678", "1500"),
+    "246810": ("1357", "200"),
+    "135792": ("2468", "300"),
+    "369258": ("9753", "700"),
+    "789456": ("3579", "900"),
+    "951357": ("4682", "1200"),
+    "147258": ("5829", "1800"),
+    "369147": ("7531", "600"),
+}
+
+for acc_num, (pin, balance) in accounts.items():
+    accounts[acc_num] = (pin, int(balance))
+
+account_number = input("Enter account number: ")
+pin = input("Enter PIN: ")
+
+if account_number in accounts and pin == accounts[account_number][0]:
+    print("Login successful.")
+    user_account = BA(account_number, pin, accounts[account_number][1])
+
+    while True:
+        print("\n1. Deposit\n2. Withdraw\n3. Display Balance\n4. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            amount = int(input("Enter the amount to deposit: "))
+            user_account.deposit(amount)
+        elif choice == "2":
+            amount = int(input("Enter the amount to withdraw: "))
+            user_account.withdraw(amount)
+        elif choice == "3":
+            user_account.display_balance()
+        elif choice == "4":
+            exit_option = input("Are you sure you want to exit? (yes/no): ")
+            if exit_option.lower() == "yes":
+                print("Thank you for banking with us.")
+                break
+        else:
+            print("Invalid choice. Please try again.")
+        
+        end = input("Do you want to exit or go back to the menu? (Yes/No): ")
+        if end.lower() == "yes":
+            exit_option = input("Are you sure you want to exit? (yes/no): ")
+            if exit_option.lower() == "yes":
+                print("Thank you for banking with us.")
+                break
+            else:
+                continue  
+else:
+    print("Invalid entry. Please try again.")
+
+
+
+OUTPUT
+
+
+Enter account number: 123456
+Enter PIN: 1234
+Login successful.
+
+1. Deposit
+2. Withdraw
+3. Display Balance
+4. Exit
+Enter your choice: 3
+Account Number: 123456
+Current Balance: 1000
+Do you want to exit or go back to the menu? (exit/menu): exit
+Are you sure you want to exit? (yes/no): yes
+Thank you for banking with us.
